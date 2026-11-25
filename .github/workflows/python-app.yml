@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "homologacao" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "homologacao" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v7.4.0
         with:
           push: true
-          tags: lucasloureiro2/api_homologacao:latest
+          tags: lucasloureiro2/api_producao:latest
 
   deploy:
     needs: imagem
@@ -58,15 +58,15 @@ jobs:
       - name: Deploy na ec2
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 3.81.192.103
+          host:  54.82.171.42
           username: ubuntu
           key: ${{ secrets.CHAVE }}
           script: |
             echo "Acesso liberado"
   
-            sudo docker pull lucasloureiro2/api_homologacao:latest
-            sudo docker stop api_homologacao 2>/dev/null || true
-            sudo docker rm api_homologacao 2>/dev/null || true
-            sudo docker run --name api_homologacao -d -p 80:8080 lucasloureiro2/api_homologacao:latest
+            sudo docker pull lucasloureiro2/api_producao:latest
+            sudo docker stop api_producao 2>/dev/null || true
+            sudo docker rm api_producao 2>/dev/null || true
+            sudo docker run --name api_producao -d -p 80:8080 lucasloureiro2/api_producao:latest
       
       
