@@ -67,6 +67,6 @@ jobs:
             sudo docker pull lucasloureiro2/api_homologacao:latest
             sudo docker stop api_homologacao 2>/dev/null || true
             sudo docker rm api_homologacao 2>/dev/null || true
-            sudo docker run --name api_homologacao -d -p 80:80 lucasloureiro2/api_homologacao:latest
+            sudo docker run --name api_homologacao -d -p 80:8080 lucasloureiro2/api_homologacao:latest
       
       
