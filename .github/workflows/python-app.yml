@@ -56,18 +56,17 @@ jobs:
 
     steps:
       - name: Deploy na ec2
-      uses: appleboy/ssh-action@v1.0.3
-
-      with:
-        host: 3.81.192.103
-        username: ubuntu
-        key: ${{ secrets.CHAVE }}
-        script: |
-          echo "Acesso liberado"
-
-          sudo docker pull lucasloureiro2/api_homologacao:latest
-          sudo docker stop api_homologacao 2>/dev/null || true
-          sudo docker rm api_homologacao 2>/dev/null || true
-          sudo docker run --name api_homologacao -d -p 80:80 lucasloureiro2/api_homologacao:latest
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 3.81.192.103
+          username: ubuntu
+          key: ${{ secrets.CHAVE }}
+          script: |
+            echo "Acesso liberado"
+  
+            sudo docker pull lucasloureiro2/api_homologacao:latest
+            sudo docker stop api_homologacao 2>/dev/null || true
+            sudo docker rm api_homologacao 2>/dev/null || true
+            sudo docker run --name api_homologacao -d -p 80:80 lucasloureiro2/api_homologacao:latest
       
       
